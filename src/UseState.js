@@ -45,7 +45,7 @@ function UseState({ name }) {
        />
       <button 
         onClick={() => {
-            //setError(false); //Es una solución
+            setError(false); //Es una solución
             setLoading(true);
         }}
         >Comprobar</button>
