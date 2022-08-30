@@ -14,11 +14,13 @@ function UseState({ name }) {
     if (!!loading) {
       setTimeout(() => {
 
-        if(value !== SECURITY_CODE){
-            setError(true);
-        }
+        if(value === SECURITY_CODE){
             setLoading(false);
-        
+            //setError(true);
+        }else{
+            setError(true);
+            setLoading(false);
+        }                    
         
       }, 3000);
     }
@@ -29,7 +31,7 @@ function UseState({ name }) {
       <h2>Eliminar {name}</h2>
       <p>Por favor, escribe el código de seguridad</p>
 
-      {error && <p>Error: el código es incorrecto</p>}
+      {(error && !loading) && (<p>Error: el código es incorrecto</p>)}
 
       {loading && <p>Cargando...</p>}
 
@@ -37,10 +39,16 @@ function UseState({ name }) {
         placeholder="Código de seguridad"
         value={value}
         onChange={(event) => {
+            //setError(false); //Aqui recarga repetidamente
             setValue(event.target.value);
         }}
        />
-      <button onClick={() => setLoading(true)}>Comprobar</button>
+      <button 
+        onClick={() => {
+            //setError(false); //Es una solución
+            setLoading(true);
+        }}
+        >Comprobar</button>
     </div>
   );
 }
